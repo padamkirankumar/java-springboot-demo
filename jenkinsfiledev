@@ -98,6 +98,7 @@ pipeline {
                     echo "Base version: ${baseVersion}"
 		    // Get the contents of pom.xml from the specified branch
                     def pomXmlContentdev = sh(script: "git show origin/develop:pom.xml", returnStdout: true).trim()
+                    echo "POM xml contentdev: ${pomXmlContentdev}"
                     // Extract version from pom.xml using grep and cut
                     def pomVersiondev = sh(script: "echo '${pomXmlContentdev}' | grep -o '<version>.*</version>' | cut -d'>' -f2 | cut -d'<' -f1 | sed -n 2p", returnStdout: true).trim()
                     echo "POM Version develop: ${pomVersiondev}"
