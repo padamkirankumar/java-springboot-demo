@@ -4,11 +4,10 @@ pipeline {
         maven 'mvn39'        
     }
     environment {
-        NAMESPACE = '9334-dev1-ifmis'
+        NAMESPACE = 'default'
         BASE_VERSION_FILE = 'baseversion.txt'
         BUILD_VERSION_FILE = 'buildversion.txt'
-        BUILD_NUMBER_FILE = "${WORKSPACE}/buildNumber.txt"
-        MODULE = "ifmis-department-location-service-out"
+        BUILD_NUMBER_FILE = "${WORKSPACE}/buildNumber.txt"        
     }
 
     stages {
