@@ -10,17 +10,7 @@ pipeline {
         BUILD_NUMBER_FILE = "${WORKSPACE}/buildNumber.txt"        
     }
 
-    stages {
-        stage('Maven Build') {
-            steps {
-                script {                    
-                        sh '''            
-                            mvn clean package
-                            ls -la
-                        '''
-                    }
-                }
-            }
+    stages {        
         stage('Initialize') {
             steps {
                 script {
@@ -184,7 +174,16 @@ pipeline {
                 }
             }    
                       
-                  
+            stage('Maven Build') {
+            steps {
+                script {                    
+                        sh '''            
+                            mvn clean package
+                            ls -la
+                        '''
+                    }
+                }
+            }      
   
     }
 }
