@@ -3,18 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.boxfuse.samples</groupId>
     <artifactId>hello</artifactId>
-    <packaging>war</packaging>
-    <version>1.0.0.1</version>
-    <name>hello</name>
-    <url>https://github.com/boxfuse/boxfuse-sample-java-war-hello</url>
+    
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>1.0.0.1</version>
+            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    <packaging>war</packaging>
+    <version>1.0.0.1</version>
+    <name>hello</name>
+    <url>https://github.com/boxfuse/boxfuse-sample-java-war-hello</url>
     <build>
         <plugins>
             <plugin>
