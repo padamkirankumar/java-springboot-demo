@@ -36,9 +36,7 @@ pipeline {
                         docker logout
                         '''
                     }
-                    else {
-                        echo "No Docker build needed as Dockerfile or source files haven't changed."
-                    }
+                    
                 }
             }
   }
