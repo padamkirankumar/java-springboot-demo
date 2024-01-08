@@ -14,6 +14,9 @@ pipeline {
         stage('Initialize') {
             steps {
                 script {
+                    // Read Module
+                    def moduleParameter = params.Module
+                    echo "Module Parameters is: ${moduleParameter}"
                     // Read the version from pom.xml
                     def pomVersion = sh(script: 'xmllint --xpath "//*[local-name()=\'project\']/*[local-name()=\'version\']/text()" pom.xml', returnStdout: true).trim()
                     echo "POM version: ${pomVersion}"
