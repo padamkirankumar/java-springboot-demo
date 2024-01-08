@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    tools {
+        maven 'mvn39'        
+    }
+    environment {
+        NAMESPACE = 'default'
+        BASE_VERSION_FILE = 'baseversion.txt'
+        BUILD_VERSION_FILE = 'buildversion.txt'
+        BUILD_NUMBER_FILE = "${WORKSPACE}/buildNumber.txt"
+        BUILD_FOLDER = "${params.Module}"
+        DOCKERFILE_FOLDER = "${params.DOCKERHUBNAME}"
+    }
+
+    stages {         
+                      
+            stage('Maven Build') {
+            steps {
+                script {                    
+                        sh '''            
+                            mvn clean package
+                            ls -la
+                        '''
+                    }
+                }
+            }  
+
+ stage('Docker Build') {
+            steps {
+                script {
+                      sh '''
+                        docker build -t ${DOCKERFILE_FOLDER}/mytomcat:${newVersion1} .		           
+		        cat ./mypassword.txt | docker login --username ${DOCKERFILE_FOLDER} --password-stdin			   
+			docker push ${DOCKERFILE_FOLDER}/mytomcat:${newVersion1}			   
+			docker rmi ${DOCKERFILE_FOLDER}/mytomcat:${newVersion1}                           
+                        docker logout
+                        '''
+                    }
+                    else {
+                        echo "No Docker build needed as Dockerfile or source files haven't changed."
+                    }
+                }
+            }
+  }
+    }
+}
