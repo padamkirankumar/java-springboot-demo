@@ -28,7 +28,7 @@ pipeline {
 		    def branchParameter = params.BRANCH
 
 		    if (!fileExists(baseVersionFile)) {
-			    if (branchParameter == 'develop1elop1') {
+			    if (branchParameter == 'develop1') {
 				// For the first build on the main branch, set the base version to '1.0.1.1'
 				echo "Initializing base version to '1.0.1.1' for the main branch..."
 				baseVersion = '1.0.1.1'
@@ -90,11 +90,11 @@ pipeline {
                     def baseVersion = env.BASE_VERSION
                     echo "Base version: ${baseVersion}"
 		    // Get the contents of pom.xml from the specified branch
-                    def pomXmlContentdevelop1 = sh(script: "git show origin/develop1elop1:${BUILD_FOLDER}/pom.xml", returnStdout: true).trim()
+                    def pomXmlContentdevelop1 = sh(script: "git show origin/develop1:${BUILD_FOLDER}/pom.xml", returnStdout: true).trim()
                     echo "POM xml contentdevelop1: ${pomXmlContentdevelop1}"
                     // Extract version from pom.xml using grep and cut
                     def pomVersiondevelop1 = sh(script: "echo '${pomXmlContentdevelop1}' | grep -o '<version>.*</version>' | cut -d'>' -f2 | cut -d'<' -f1 | sed -n 2p", returnStdout: true).trim()
-                    echo "POM Version develop1elop1: ${pomVersiondevelop1}"
+                    echo "POM Version develop1: ${pomVersiondevelop1}"
 
                     // Increment the version based on the release type
                     def newVersion
@@ -106,7 +106,7 @@ pipeline {
                             // Split the version string using dot as a delimiter
                     def (preMajor, preMinor, prePatch, present2Build) = pomVersion.split('\\.')
                     def (inibaseMajor, inibaseMinor, inibasePatch,inibaseBuild) = baseVersion.split('\\.')
-                    if (releaseType == 'initialbuild' && branchName == 'develop1elop1' && (baseVersion == pomVersion && pomVersion == '1.0.1.1')) {  
+                    if (releaseType == 'initialbuild' && branchName == 'develop1' && (baseVersion == pomVersion && pomVersion == '1.0.1.1')) {  
                         newVersion = "${preMajor}.${preMinor}.${prePatch}.${present2Build}"
                         echo "New version: ${newVersion}"
 		    }else if (releaseType == 'initialbuild' && branchName == 'testsit-1' && baseVersion == pomVersion && pomVersiondevelop1==baseVersion) { 
