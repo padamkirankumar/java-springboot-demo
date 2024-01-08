@@ -17,7 +17,8 @@ pipeline {
             stage('Maven Build') {
             steps {
                 script {                    
-                        sh '''            
+                        sh '''
+                            cd ${BUILD_FOLDER}
                             mvn clean package
                             ls -la
                         '''
