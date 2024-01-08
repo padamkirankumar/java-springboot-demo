@@ -8,7 +8,7 @@ pipeline {
         BASE_VERSION_FILE = 'baseversion.txt'
         BUILD_VERSION_FILE = 'buildversion.txt'
         BUILD_NUMBER_FILE = "${WORKSPACE}/buildNumber.txt"
-        BUILD_FOLDER = params.Module
+        BUILD_FOLDER = 'params.Module'
     }
 
     stages {        
