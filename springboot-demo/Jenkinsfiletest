@@ -30,6 +30,7 @@ pipeline {
             steps {
                 script {
                       sh '''
+                       cd ${BUILD_FOLDER}
                         docker build -t ${DOCKERFILE_FOLDER}/mytomcat:v5 .		           
 		        cat ./mypassword.txt | docker login --username ${DOCKERFILE_FOLDER} --password-stdin			   
 			docker push ${DOCKERFILE_FOLDER}/mytomcat:v5			   
