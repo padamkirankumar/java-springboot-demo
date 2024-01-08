@@ -186,7 +186,45 @@ pipeline {
                         '''
                     }
                 }
-            }      
-  
+            }  
+
+ stage('Docker Build') {
+            steps {
+                script {
+                    def isDockerBuildNeeded = fileExists("${WORKSPACE}/Dockerfile")
+                    def newVersion = readFile("${WORKSPACE}/build_version.txt")
+                     // Get the branch name from the choice parameter
+                    def branchName = params.BRANCH
+                    // Read Module
+                    def moduleParameter = params.Module
+                    echo "Module Parameters is: ${moduleParameter}"
+                    echo "Branch is: ${branchName}"
+                    // Append "-SNAPSHOT" or "-RELEASE" based on the branch
+                    if (branchName == 'dev') {
+                        newVersion1 = "${newVersion}-SNAPSHOT"
+                    } else if (branchName == 'qa') {
+                        newVersion1 = "${newVersion}-RELEASE"
+                    }
+                    echo "Using the new version in Docker Build stage: ${newVersion1}"
+                    if (isDockerBuildNeeded) {
+                        echo "Building Docker image with Docker..."
+                                           
+
+                        // Set environment variables for proxy and temporary directory
+
+                        sh '''
+                        docker build -t ${moduleParameter}/mytomcat:${newVersion1} .		           
+		        cat ./mypassword.txt | docker login --username ${moduleParameter} --password-stdin			   
+			docker push ${moduleParameter}/mytomcat:${newVersion1}			   
+			docker rmi ${moduleParameter}/mytomcat:${newVersion1}                           
+                        docker logout
+                        '''
+                    }
+                    else {
+                        echo "No Docker build needed as Dockerfile or source files haven't changed."
+                    }
+                }
+            }
+  }
     }
 }
