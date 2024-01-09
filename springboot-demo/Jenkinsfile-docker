@@ -210,6 +210,11 @@ pipeline {
                       pwd
                       cd ${BUILD_FOLDER}
                       ls
+                      docker build -t padamkiran/mytomcat:${newVersion1} -f ${BUILD_FOLDER}/Dockerfile .
+                      cat ./mypassword.txt | docker login --username padamkiran --password-stdin
+                      docker push padamkiran/mytomcat:${newVersion1}
+                      docker rmi padamkiran/mytomcat:${newVersion1}
+                      docker logout
                       '''              
                      
                      
