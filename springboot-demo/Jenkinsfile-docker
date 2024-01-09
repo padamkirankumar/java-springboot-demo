@@ -209,7 +209,7 @@ pipeline {
                     
                      
                      sh "pwd"
-                     sh "cd ${BUILD_FOLDER}"
+                     sh "cd springboot-demo"
                      sh "ls"
                      sh "docker build -t padamkiran/mytomcat:${newVersion1} ."	           
 		     sh "cat ./mypassword.txt | docker login --username padamkiran --password-stdin"		   
