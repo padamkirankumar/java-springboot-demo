@@ -208,10 +208,9 @@ pipeline {
                     echo "Building Docker image with Docker..."                             
                     
                      
-                     sh "pwd"
-                     sh "cd springboot-demo"
+                     sh "pwd"                     
                      sh "ls"
-                     sh "docker build -t padamkiran/mytomcat:${newVersion1} -f springboot-demo/Dockerfile ."	           
+                     sh "docker build -t padamkiran/mytomcat:${newVersion1} -f ${BUILD_FOLDER}/Dockerfile ."	           
 		     sh "cat ./mypassword.txt | docker login --username padamkiran --password-stdin"		   
 		     sh "docker push padamkiran/mytomcat:${newVersion1}"		   
 		     sh "docker rmi padamkiran/mytomcat:${newVersion1}"                          
