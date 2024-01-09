@@ -208,6 +208,9 @@ pipeline {
 
                      sh '''
                        cd ${BUILD_FOLDER}
+                       pwd
+                       ls
+                       echo "newversion is: ${newVersion1}"
                         docker build -t padamkiran/mytomcat:${newVersion1} .		           
 		        cat ./mypassword.txt | docker login --username padamkiran --password-stdin			   
 			docker push padamkiran/mytomcat:${newVersion1}			   
