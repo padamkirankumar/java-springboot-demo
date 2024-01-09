@@ -180,7 +180,8 @@ pipeline {
             stage('Maven Build') {
             steps {
                 script {                    
-                        sh '''            
+                        sh '''   
+                            cd ${BUILD_FOLDER}
                             mvn clean package
                             ls -la
                         '''
@@ -203,22 +204,17 @@ pipeline {
                         newVersion1 = "${newVersion}-RELEASE"
                     }
                     echo "Using the new version in Docker Build stage: ${newVersion1}"
-                    if (isDockerBuildNeeded) {
-                        echo "Building Docker image with Docker..."                                           
+                    echo "Building Docker image with Docker..."                                 
 
-                        // Set environment variables for proxy and temporary directory
-
-                        sh '''
-                        docker build -t ${BUILD_FOLDER}/mytomcat:${newVersion1} .		           
-		        cat ./mypassword.txt | docker login --username ${BUILD_FOLDER} --password-stdin			   
-			docker push ${BUILD_FOLDER}/mytomcat:${newVersion1}			   
-			docker rmi ${BUILD_FOLDER}/mytomcat:${newVersion1}                           
+                     sh '''
+                       cd ${BUILD_FOLDER}
+                        docker build -t padamkiran/mytomcat:${newVersion1} .		           
+		        cat ./mypassword.txt | docker login --username padamkiran --password-stdin			   
+			docker push padamkiran/mytomcat:${newVersion1}			   
+			docker rmi padamkiran/mytomcat:${newVersion1}                           
                         docker logout
                         '''
-                    }
-                    else {
-                        echo "No Docker build needed as Dockerfile or source files haven't changed."
-                    }
+                    
                 }
             }
   }
