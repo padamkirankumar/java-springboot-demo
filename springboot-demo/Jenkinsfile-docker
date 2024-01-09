@@ -192,7 +192,8 @@ pipeline {
  stage('Docker Build') {
             steps {
                 script {
-                    def isDockerBuildNeeded = fileExists("${WORKSPACE}/Dockerfile")
+                    def isDockerBuildNeeded = fileExists("${WORKSPACE}/${BUILD_FOLDER}/Dockerfile")
+                    echo "isDockerBuildNeeded is: ${isDockerBuildNeeded}"
                     def newVersion = readFile("${WORKSPACE}/build_version.txt")
                      // Get the branch name from the choice parameter
                     def branchName = params.BRANCH                   
@@ -204,10 +205,11 @@ pipeline {
                         newVersion1 = "${newVersion}-RELEASE"
                     }
                     echo "Using the new version in Docker Build stage: ${newVersion1}"
-                    echo "Building Docker image with Docker..."                                 
+                    echo "Building Docker image with Docker..."                             
                     
-                     sh "cd ${BUILD_FOLDER}"
+                     
                      sh "pwd"
+                     sh "cd ${BUILD_FOLDER}"
                      sh "ls"
                      sh "docker build -t padamkiran/mytomcat:${newVersion1} ."	           
 		     sh "cat ./mypassword.txt | docker login --username padamkiran --password-stdin"		   
