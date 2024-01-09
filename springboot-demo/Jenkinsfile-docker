@@ -92,8 +92,10 @@ pipeline {
 		    // Get the contents of pom.xml from the specified branch
                     def pomXmlContentdevelop1 = sh(script: "git show origin/develop1:${BUILD_FOLDER}/pom.xml", returnStdout: true).trim()
                     echo "POM xml contentdevelop1: ${pomXmlContentdevelop1}"
+                    // write xml into local workspace
+                    writeFile file: 'pom-develop1.xml', text: pomXmlContentdevelop1
                     // Extract version from pom.xml using grep and cut
-                    def pomVersiondevelop1 = sh(script: "echo '${pomXmlContentdevelop1}' | grep -o '<version>.*</version>' | cut -d'>' -f2 | cut -d'<' -f1 | sed -n 2p", returnStdout: true).trim()
+                    def pomVersiondevelop1 = sh(script: 'xmllint --xpath "//*[local-name()=\'project\']/*[local-name()=\'version\']/text()" pom-develop1.xml', returnStdout: true).trim()
                     echo "POM Version develop1: ${pomVersiondevelop1}"
 
                     // Increment the version based on the release type
