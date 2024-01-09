@@ -206,13 +206,11 @@ pipeline {
                     }
                     echo "Using the new version in Docker Build stage: ${newVersion1}"
                     echo "Building Docker image with Docker..."                             
-                    sh
-                      '''
+                    sh '''
                       pwd
                       cd ${BUILD_FOLDER}
                       ls
-                      '''
-                      
+                      '''              
                      
                      
                               
