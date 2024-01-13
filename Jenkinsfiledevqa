@@ -16,8 +16,7 @@ pipeline {
             steps {
                 script {
                     
-                        sh '''        
-                            echo ${BASE_VERSION_FILE}
+                        sh '''                            
                             ls -la
                         '''
                        }
