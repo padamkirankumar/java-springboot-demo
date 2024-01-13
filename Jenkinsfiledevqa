@@ -37,9 +37,9 @@ pipeline {
 
 		    if (!fileExists(baseVersionFile)) {
 			    if (branchParameter == 'develop') {
-				// For the first build on the main branch, set the base version to '1..0.1.1'
-				echo "Initializing base version to '1..0.1.1' for the main branch..."
-				baseVersion = '1..0.1.1'
+				// For the first build on the main branch, set the base version to '1.0.1.1'
+				echo "Initializing base version to '1.0.1.1' for the main branch..."
+				baseVersion = '1.0.1.1'
 			    } else if(branchParameter == 'qa') {
 				// For the first build on non-main branches, set the base version to the version in pom.xml
 				echo "Initializing base version to '${pomVersion}'..."
@@ -113,7 +113,7 @@ pipeline {
                             // Split the version string using dot as a delimiter
                     def (preMajor, preMinor, prePatch, present2Build) = pomVersion.split('\\.')
                     def (inibaseMajor, inibaseMinor, inibasePatch,inibaseBuild) = baseVersion.split('\\.')
-                    if (releaseType == 'initialbuild' && branchName == 'develop' && (baseVersion == pomVersion && pomVersion == '1..0.1.1')) {  
+                    if (releaseType == 'initialbuild' && branchName == 'develop' && (baseVersion == pomVersion && pomVersion == '1.0.1.1')) {  
                         newVersion = "${preMajor}.${preMinor}.${prePatch}.${present2Build}"
                         echo "New version: ${newVersion}"
 		    }else if (releaseType == 'initialbuild' && branchName == 'qa' && baseVersion == pomVersion && pomVersiondev==baseVersion) { 
