@@ -16,8 +16,8 @@ pipeline {
             steps {
                 script {
                     
-                        sh '''            
-                            mvn clean package
+                        sh '''        
+                            echo ${BASE_VERSION_FILE}
                             ls -la
                         '''
                        }
