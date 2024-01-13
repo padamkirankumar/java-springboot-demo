@@ -5,9 +5,9 @@ pipeline {
     }
     environment {
         NAMESPACE = 'default'
-        BASE_VERSION_FILE = "${WORKSPACE}/params.BRANCH/baseversion.txt"
-        BUILD_VERSION_FILE = "${WORKSPACE}/params.BRANCH/buildversion.txt"
-        BUILD_NUMBER_FILE = "${WORKSPACE}/params.BRANCH/buildNumber.txt"
+        BASE_VERSION_FILE = "${WORKSPACE}/${params.BRANCH}/baseversion.txt"
+        BUILD_VERSION_FILE = "${WORKSPACE}/${params.BRANCH}/buildversion.txt"
+        BUILD_NUMBER_FILE = "${WORKSPACE}/${params.BRANCH}/buildNumber.txt"
         MODULE = "test"
     }
 
