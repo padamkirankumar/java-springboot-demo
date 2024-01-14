@@ -181,6 +181,8 @@ pipeline {
                                     
                     }
 addHtmlBadge id: 'b-branch', html: "BRANCH : <strong>${params.BRANCH}</strong><br>"
+addHtmlBadge id: 'b-releasetype', html: "RELEASE TYPE : <strong>${params.releaseType}</strong><br>"
+addHtmlBadge id: 'b-pomversion', html: "POM-VERSION : <strong>${pomVersion}</strong><br>"
                 }
             }          
                   
