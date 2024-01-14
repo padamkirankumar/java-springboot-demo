@@ -178,11 +178,11 @@ pipeline {
                     writeFile file: buildVersionFile, text: newVersion
                     writeFile file: baseVersionFile, text: newVersion
                     echo "New version written to ${buildVersionFile}"
-                                    
-                    }
-addHtmlBadge id: 'b-branch', html: "BRANCH : <strong>${params.BRANCH}</strong><br>"
+                     addHtmlBadge id: 'b-branch', html: "BRANCH : <strong>${params.BRANCH}</strong><br>"
 addHtmlBadge id: 'b-releasetype', html: "RELEASE TYPE : <strong>${params.releaseType}</strong><br>"
-addHtmlBadge id: 'b-pomversion', html: "POM-VERSION : <strong>${pomVersiondev}</strong><br>"
+addHtmlBadge id: 'b-pomversion', html: "POM-VERSION : <strong>${pomVersiondev}</strong><br>"               
+                    }
+
                 }
             }          
                   
