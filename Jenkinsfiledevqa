@@ -180,6 +180,7 @@ pipeline {
                     echo "New version written to ${buildVersionFile}"
                                     
                     }
+addHtmlBadge id: 'b-branch', html: "BRANCH : <strong>${params.BRANCH}</strong><br>"
                 }
             }          
                   
