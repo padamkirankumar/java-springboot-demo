@@ -13,7 +13,7 @@
         </dependency>
     </dependencies>
     <packaging>war</packaging>
-    <version>1.0.1.2</version>
+    <version>1.0.1.3</version>
     <name>hello</name>
     <url>https://github.com/boxfuse/boxfuse-sample-java-war-hello</url>
     <build>
