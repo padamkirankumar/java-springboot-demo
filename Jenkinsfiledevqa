@@ -8,7 +8,7 @@ pipeline {
         BASE_VERSION_FILE = "${params.BRANCH}/baseversion.txt"
         BUILD_VERSION_FILE = "${params.BRANCH}/buildversion.txt"
         BUILD_NUMBER_FILE = "${params.BRANCH}/buildNumber.txt"
-        POM_VERSION_NUMBER = 1.0.1.1
+        POM_VERSION_NUMBER = '1.0.1.1'
         MODULE = "test"
     }
 
