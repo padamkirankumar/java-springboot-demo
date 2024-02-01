@@ -8,6 +8,7 @@ pipeline {
         BASE_VERSION_FILE = "${params.BRANCH}/baseversion.txt"
         BUILD_VERSION_FILE = "${params.BRANCH}/buildversion.txt"
         BUILD_NUMBER_FILE = "${params.BRANCH}/buildNumber.txt"
+        POM_VERSION_NUMBER = 1.0.1.1
         MODULE = "test"
     }
 
@@ -113,7 +114,7 @@ pipeline {
                             // Split the version string using dot as a delimiter
                     def (preMajor, preMinor, prePatch, present2Build) = pomVersion.split('\\.')
                     def (inibaseMajor, inibaseMinor, inibasePatch,inibaseBuild) = baseVersion.split('\\.')
-                    if (releaseType == 'initialbuild' && branchName == 'develop' && (baseVersion == pomVersion && pomVersion == '1.0.1.1')) {  
+                    if (releaseType == 'initialbuild' && branchName == 'develop' && (baseVersion == pomVersion && pomVersion == ${POM_VERSION_NUMBER})) {  
                         newVersion = "${preMajor}.${preMinor}.${prePatch}.${present2Build}"
                         echo "New version: ${newVersion}"
 		    }else if (releaseType == 'initialbuild' && branchName == 'qa' && baseVersion == pomVersion && pomVersiondev==baseVersion) { 
